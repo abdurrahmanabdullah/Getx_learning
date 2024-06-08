@@ -1,33 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get_learn/app/modules/home/controller/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({super.key});
-  // final dependency = Get.put(CounterController());
+  const HomeView({Key? key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        children: [
-          Obx(() => Text(controller.count1.toString())),
-          Obx(() => Text(controller.count2.toString()))
+      appBar: AppBar(
+        title: const Text('HomeView'),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              controller.fetchContact();
+            },
+            icon: const Icon(Icons.refresh),
+          ),
         ],
       ),
-      floatingActionButton: Row(
-        children: [
-          FloatingActionButton(
-            onPressed: controller.increment1,
-            child: const Icon(Icons.add),
-          ),
-          FloatingActionButton(
-            onPressed: controller.increment2,
-            child: const Icon(Icons.add),
-          ),
-        ],
+      body: SafeArea(
+        child: Obx(() {
+          final contacts = controller.contacts.value;
+          if (contacts == null) {
+            return const Center(child: CircularProgressIndicator());
+          } else {
+            return ListView.builder(
+              itemCount: contacts.results?.length,
+              itemBuilder: (context, index) {
+                final contact = contacts.results![index];
+                return Column(
+                  children: [
+                    Image.network(
+                      controller.contacts.value?.results?[index]?.picture
+                              ?.medium ??
+                          '',
+                    ),
+                    Text(contact.name?.first ?? ''),
+                    Text(contact.name?.last ?? ''),
+                    Text(contact.location?.country ?? ''),
+                    Text(contact.email ?? ''),
+                  ],
+                );
+              },
+            );
+          }
+        }),
       ),
     );
   }

@@ -20,6 +20,11 @@ import 'package:http/http.dart' as http;
 
 class HomeController extends GetxController {
   Rx<ContactModel?> contacts = Rx(null);
+  final isDark = false.obs;
+  void changeSwitch(bool themeMode) {
+    isDark.value = themeMode;
+  }
+
   Future<ContactModel> fetchContact() async {
     final response = await http.get(Uri.parse(api));
     print(response.body);

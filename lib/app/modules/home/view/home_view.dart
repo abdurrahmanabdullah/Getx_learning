@@ -146,12 +146,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_learn/app/modules/home/controller/home_controller.dart';
 import 'package:get_learn/app/modules/home/controller/theme_controller.dart';
-import 'package:get_learn/app/modules/second_page/view/second_view.dart';
 import 'package:get_learn/app/routes/app_routes.dart';
 
 class HomeView extends GetView<HomeController> {
   HomeView({Key? key});
   bool isDartMode = false;
+
   // final ThemeController themeController = Get.put(ThemeController());
   @override
   Widget build(BuildContext context) {
@@ -193,6 +193,9 @@ class HomeView extends GetView<HomeController> {
                       controller.contacts.value?.results?[index]?.picture
                               ?.medium ??
                           '',
+                      height: 100,
+                      width: 100,
+                      fit: BoxFit.cover,
                     ),
                     Text(contact.name?.first ?? ''),
                     Text(contact.name?.last ?? ''),
@@ -225,6 +228,7 @@ class HomeView extends GetView<HomeController> {
                     ElevatedButton(
                       onPressed: () {
                         //Get.off=>no back button
+                        //Get.offAllName =>used when remove all stack  page
                         // Get.to(SecondPageView());
                         Get.toNamed(AppRoutes.secondPage, arguments: {
                           'name': 'Getx Live argument pass',

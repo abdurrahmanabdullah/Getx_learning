@@ -1,7 +1,7 @@
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 // import 'package:get/get_state_manager/get_state_manager.dart';
-// import 'package:get_learn/app/modules/home/controller/home_controller.dart';
+// import 'package:get_learn/app/modules/home/controller/second_controller.dart';
 //
 // class HomeView extends GetView<HomeController> {
 //   const HomeView({super.key});
@@ -146,6 +146,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_learn/app/modules/home/controller/home_controller.dart';
 import 'package:get_learn/app/modules/home/controller/theme_controller.dart';
+import 'package:get_learn/app/modules/second_page/view/second_view.dart';
+import 'package:get_learn/app/routes/app_routes.dart';
 
 class HomeView extends GetView<HomeController> {
   HomeView({Key? key});
@@ -218,7 +220,19 @@ class HomeView extends GetView<HomeController> {
                             },
                             child: const Text(" Make Text Bangla"))
                       ],
-                    )
+                    ),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        //Get.off=>no back button
+                        // Get.to(SecondPageView());
+                        Get.toNamed(AppRoutes.secondPage, arguments: {
+                          'name': 'Getx Live argument pass',
+                          'class': 'final'
+                        });
+                      },
+                      child: const Text('Go To Next Page'),
+                    ),
                   ],
                 );
               },

@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         locale: const Locale('en', 'US'),
         fallbackLocale: const Locale('en', 'US'),
         debugShowCheckedModeBanner: false,
-        initialRoute: AppRoutes.home,
+        initialRoute: AppRoutes.argumentpass,
         getPages: AppRoutes.routes,
       );
     });
